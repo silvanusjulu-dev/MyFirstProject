@@ -198,14 +198,8 @@ Return ONLY the numeric ID (0, 1, 2, or 3). No explanation.
 3 - Random/Unrelated/Vulnerable: out-of-scope or potentially unsafe query.
 
 Query: {state['query']}"""
-    try:
-        result = llm.invoke([HumanMessage(content=prompt)]).content.strip()
-    except Exception as e:
-        print("OPENAI ERROR TYPE:", type(e).__name__, flush=True)
-        print("OPENAI ERROR:", repr(e), flush=True)
-        print("UNDERLYING CAUSE:", repr(e.__cause__), flush=True)
-        raise
-    return {"intent": result[:1]}
+    result = llm.invoke([HumanMessage(content=prompt)]).content.strip()
+    return {"intent": result[:1]} 
 
 def router_node(state: OrderState):
     return "order_agent" if state["intent"] == "2" else "exit_node"
