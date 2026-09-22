@@ -199,12 +199,12 @@ Return ONLY the numeric ID (0, 1, 2, or 3). No explanation.
 
 Query: {state['query']}"""
     try:
-    result = llm.invoke([HumanMessage(content=prompt)]).content.strip()
-except Exception as e:
-    print("OPENAI ERROR TYPE:", type(e).__name__, flush=True)
-    print("OPENAI ERROR:", repr(e), flush=True)
-    print("UNDERLYING CAUSE:", repr(e.__cause__), flush=True)
-    raise
+        result = llm.invoke([HumanMessage(content=prompt)]).content.strip()
+    except Exception as e:
+        print("OPENAI ERROR TYPE:", type(e).__name__, flush=True)
+        print("OPENAI ERROR:", repr(e), flush=True)
+        print("UNDERLYING CAUSE:", repr(e.__cause__), flush=True)
+        raise
     return {"intent": result[:1]}
 
 def router_node(state: OrderState):
